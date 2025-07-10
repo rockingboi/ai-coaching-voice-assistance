@@ -6,6 +6,7 @@ function AuthProvider({chldern}) {
 
      const user=useUser();
      const CreateUser=useMutation(api.users.CreateUser);
+     const [userData, setUserData] = useState();
 
      useEffect(() => {
         console.log(user)
@@ -18,12 +19,16 @@ function AuthProvider({chldern}) {
             email:user.primaryemail
         });
         console.log(result);
+        setUserData(result);
 
      }
 
 
   return (
     <div>
+        <UserContext.Provider value={{ userData, setUserData}}>
+            {childen}
+        </UserContext.Provider>
         {chldern}
         </div>
   )
